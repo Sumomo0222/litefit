@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f9d94">
+<meta name="description" content="轻练 LiteFit · 户外减脂入门 · 每日 15–20 分钟">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230f9d94'/%3E%3Cpath d='M13 4 5.5 13.5H11l-1 6.5L17.5 10.5H12z' fill='white'/%3E%3C/svg%3E">
+<title>轻练 LiteFit · 每日健身</title>
+<style>
+:root{
+  --bg:#f2f7f5; --card:#ffffff; --ink:#182830; --mut:#7d908a; --soft:#4b6159;
+  --acc:#0f9d94; --acc-deep:#0b7d74; --acc-bg:#e6f4f0; --line:#e2eeea;
+  --bad:#dd8a8a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:16px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom));
+}
+.hide{display:none!important}
+
+/* 顶栏 */
+.top{max-width:560px;margin:0 auto;padding:20px 18px 4px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;flex:none;white-space:nowrap}
+.logo{font-size:21px;font-weight:800;letter-spacing:1px}
+.logo em{font-style:normal;color:var(--acc)}
+.tagline{font-size:11px;color:var(--mut);line-height:1.4}
+.gen{font-size:10.5px;color:var(--mut);text-align:right;line-height:1.5;padding-bottom:2px;flex:none}
+
+main{max-width:560px;margin:0 auto;padding:12px 14px 8px}
+.card{background:var(--card);border-radius:18px;padding:16px;margin-bottom:12px;
+  box-shadow:0 1px 2px rgba(15,60,50,.05),0 10px 26px -20px rgba(15,60,50,.3)}
+
+/* 今日 hero */
+.hero{background:linear-gradient(135deg,#0f9d94 0%,#27b98d 100%);color:#fff;border-radius:20px;padding:18px;margin-bottom:12px;
+  box-shadow:0 12px 28px -16px rgba(15,157,148,.65)}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hdate{font-size:13px;opacity:.92;font-weight:600}
+.hchip{font-size:11.5px;font-weight:700;background:rgba(255,255,255,.22);padding:4px 11px;border-radius:999px;white-space:nowrap}
+.htitle{font-size:22px;font-weight:800;margin:8px 0 4px;letter-spacing:.5px}
+.hmeta{font-size:12.5px;opacity:.92;display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.prog{height:6px;border-radius:99px;background:rgba(255,255,255,.28);overflow:hidden}
+.prog i{display:block;height:100%;background:#fff;border-radius:99px;transition:width .35s}
+.prog-row{display:flex;justify-content:space-between;font-size:11px;opacity:.95;margin-top:6px}
+.donebanner{display:flex;align-items:center;gap:8px;background:#e2f4ee;color:#0b7d74;border-radius:14px;padding:10px 14px;font-size:13.5px;font-weight:600;margin-bottom:12px}
+
+/* 分组列表 */
+.sec{display:flex;align-items:center;gap:8px;margin:16px 4px 9px;font-weight:800;font-size:15px}
+.sec .dot{width:8px;height:8px;border-radius:99px;background:var(--acc)}
+.sec small{font-weight:500;color:var(--mut);font-size:12px}
+.item{display:flex;gap:12px;align-items:flex-start;background:var(--card);border-radius:16px;padding:13px 14px;margin-bottom:8px;
+  box-shadow:0 1px 2px rgba(15,60,50,.05)}
+.ck{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid #c9ded8;background:#fff;cursor:pointer;
+  display:grid;place-items:center;color:transparent;transition:all .18s;padding:0}
+.ck.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.ck svg{width:15px;height:15px}
+.it-main .iname{font-weight:700}
+.iname{font-size:15px;font-weight:600;line-height:1.4}
+.idet{font-size:13.5px;color:var(--soft);margin-top:2px;line-height:1.5}
+.rest-chip{display:inline-block;font-size:11px;background:var(--acc-bg);color:var(--acc-deep);padding:2px 9px;border-radius:999px;margin-top:6px;font-weight:600}
+.itip{font-size:12px;color:var(--mut);margin-top:4px;line-height:1.55}
+.recover{font-size:14px;color:var(--soft);line-height:1.8}
+.notes{font-size:12.5px;color:var(--mut);line-height:1.7;background:var(--acc-bg);border-radius:14px;padding:10px 14px;margin-top:10px}
+.opt-tag{font-size:10.5px;color:var(--mut);border:1px solid var(--line);padding:1px 7px;border-radius:99px;margin-left:6px}
+
+.cta{width:100%;padding:15px;border:0;border-radius:16px;background:var(--acc);color:#fff;font-size:16px;font-weight:800;cursor:pointer;margin-top:6px;letter-spacing:1px}
+.cta:active{transform:scale(.985)}
+.ghost{width:100%;padding:13px;border:0;border-radius:16px;background:#edf4f1;color:#3c584f;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px}
+.hint{font-size:12px;color:var(--mut);line-height:1.7;margin:8px 4px}
+
+/* 打卡页 */
+.weekstrip{display:flex;gap:6px}
+.cell{flex:1;text-align:center;padding:10px 0 9px;border-radius:14px;background:var(--card);box-shadow:0 1px 2px rgba(15,60,50,.05)}
+.cell .d{font-size:11px;color:var(--mut);font-weight:600}
+.cell .b{margin-top:6px;font-size:16px;font-weight:800;line-height:1}
+.cell.done{background:#e4f5ee}.cell.done .b{color:var(--acc-deep)}
+.cell.rdone{background:#eef4f2}.cell.rdone .b{color:#9fb4ae}
+.cell.missed .b{color:var(--bad)}
+.cell.today{box-shadow:inset 0 0 0 2px var(--acc),0 1px 2px rgba(15,60,50,.05)}
+.cell.rest .b{color:#bccbc6}
+.statrow{display:flex;gap:8px;margin-top:10px}
+.stat{flex:1;background:var(--card);border-radius:16px;padding:13px 6px;text-align:center;box-shadow:0 1px 2px rgba(15,60,50,.05)}
+.stat b{display:block;font-size:21px;color:var(--acc-deep)}
+.stat span{font-size:10.5px;color:var(--mut);font-weight:600}
+.h-item{background:var(--card);border-radius:16px;padding:13px 15px;margin-bottom:8px;box-shadow:0 1px 2px rgba(15,60,50,.05);cursor:pointer}
+.h-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.h-date{font-weight:700;font-size:14px}
+.h-sub{font-size:12.5px;color:var(--mut);margin-top:3px}
+.h-badge{font-size:11.5px;font-weight:800;color:var(--acc-deep);background:var(--acc-bg);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.h-badge.r{color:#8a9c96;background:#eef3f1}
+.h-badge.m{color:var(--bad);background:#faeeee}
+.h-detail{border-top:1px dashed var(--line);margin-top:10px;padding-top:10px;font-size:13px;color:var(--soft);line-height:1.7}
+.tools{display:flex;gap:8px;margin-top:4px}
+.tbtn{flex:1;padding:11px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--soft);font-size:12.5px;font-weight:600;cursor:pointer}
+.warn{color:var(--bad)}
+
+/* 总结页 */
+.ratewrap{margin-top:10px}
+.ratelabel{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:5px}
+.ratebar{height:8px;background:#edf3f1;border-radius:99px;overflow:hidden}
+.ratebar i{display:block;height:100%;background:linear-gradient(90deg,#0f9d94,#2fbf8f);border-radius:99px;transition:width .4s}
+.sum-text{font-size:14px;line-height:1.85;color:#2c4038}
+.sug{margin:10px 0 0;padding-left:18px;font-size:13px;color:#3d544c;line-height:1.75}
+.sug li{margin-bottom:2px}
+.sug-t{font-size:12.5px;font-weight:700;color:var(--acc-deep);margin-top:12px}
+.wk-label{font-size:13px;font-weight:800;margin-bottom:6px}
+.wk-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.wk-pill{font-size:11.5px;background:#eef6f3;color:#39655c;padding:4px 10px;border-radius:999px;font-weight:600}
+.gen-by{font-size:11px;color:var(--mut);margin-top:10px}
+
+/* 底部导航 */
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;z-index:40;pointer-events:none;
+  padding:24px 14px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,var(--bg) 55%,transparent)}
+.bar{pointer-events:auto;display:flex;gap:2px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:22px;padding:6px;box-shadow:0 10px 30px -12px rgba(15,60,50,.45),0 1px 2px rgba(15,60,50,.08)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 17px;border-radius:16px;border:0;background:transparent;
+  color:#8aa19a;font-size:11px;font-weight:700;cursor:pointer;min-width:86px}
+.tab svg{width:21px;height:21px}
+.tab.on{background:var(--acc);color:#fff;box-shadow:0 6px 14px -6px rgba(15,157,148,.6)}
+
+/* 打卡弹层 */
+.mask{position:fixed;inset:0;background:rgba(8,32,27,.45);display:flex;align-items:flex-end;z-index:60}
+.sheet{background:#fff;width:100%;max-width:560px;margin:0 auto;border-radius:24px 24px 0 0;padding:20px 20px calc(26px + env(safe-area-inset-bottom));animation:up .28s}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.sh-t{font-size:18px;font-weight:800;margin-bottom:14px}
+.sh-l{font-size:13.5px;font-weight:700;color:var(--soft);margin:14px 0 8px}
+.stepper{display:flex;align-items:center;gap:16px}
+.stp{width:40px;height:40px;border-radius:13px;border:1.5px solid var(--line);background:#fff;font-size:21px;font-weight:700;color:var(--acc-deep);cursor:pointer}
+#shDur{width:64px;border:0;font-size:22px;font-weight:800;text-align:center;color:var(--ink)}
+.sh-unit{font-size:13px;color:var(--mut)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:9px 15px;border-radius:999px;background:#eef4f2;border:1.5px solid transparent;font-size:13.5px;font-weight:600;color:#516b63;cursor:pointer}
+.chip.on{border-color:var(--acc);background:#e0f3ec;color:var(--acc-deep)}
+#shNote{width:100%;border:1.5px solid var(--line);border-radius:13px;padding:10px 12px;font-size:14px;font-family:inherit;min-height:60px;resize:none}
+.sh-cancel{margin-top:8px;background:#f0f5f3}
+
+.toast{position:fixed;left:50%;bottom:118px;transform:translateX(-50%);background:#123a33;color:#fff;padding:11px 20px;border-radius:999px;
+  font-size:14px;font-weight:600;z-index:99;box-shadow:0 10px 24px -10px rgba(0,0,0,.4);transition:opacity .3s;pointer-events:none}
+.toast.hide{opacity:0}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="logo">轻练<em>·</em></div>
+    <div class="tagline">LiteFit<br>户外减脂入门</div>
+  </div>
+  <div class="gen" id="genInfo"></div>
+</header>
+
+<main>
+  <section class="view" id="v-today"></section>
+  <section class="view hide" id="v-log"></section>
+  <section class="view hide" id="v-week"></section>
+</main>
+
+<nav class="tabs">
+  <div class="bar">
+    <button class="tab on" data-v="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>今日训练</button>
+    <button class="tab" data-v="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M8.5 15.5l2.3 2.3 4.7-4.7"/></svg>训练打卡</button>
+    <button class="tab" data-v="week"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>每周总结</button>
+  </div>
+</nav>
+
+<div class="mask hide" id="mask"><div class="sheet" id="sheet"></div></div>
+<div class="toast hide" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+'use strict';
+/* ============ 基础 ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const DATA=(function(){try{return window.__FIT_DATA__||null}catch(e){return null}})();
+const P=(DATA&&DATA.profile)||{};
+const LSK={r:'litefit.records.v1',s:'litefit.summaries.v1'};
+function jload(k,d){try{const v=JSON.parse(localStorage.getItem(k)||'null');return(v&&typeof v==='object')?v:d}catch(e){return d}}
+const REC=jload(LSK.r,{}), SUM=jload(LSK.s,{});
+function jsave(){try{localStorage.setItem(LSK.r,JSON.stringify(REC));localStorage.setItem(LSK.s,JSON.stringify(SUM))}catch(e){}}
+const pad=n=>(n<10?'0':'')+n;
+const dkey=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const pdate=s=>new Date(s+'T00:00:00');
+const today=()=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const mondayOf=d=>{const x=new Date(d);return addD(x,-((x.getDay()+6)%7))};
+const WD=['周日','周一','周二','周三','周四','周五','周六'];
+const cn=d=>(d.getMonth()+1)+'月'+d.getDate()+'日';
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtMin=m=>m>=60?(Math.floor(m/60)+'小时'+(m%60?((m%60)+'分钟'):'')):(m+'分钟');
+const CK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5 10-11"/></svg>';
+
+/* ============ 计划读取与备用模板 ============ */
+function planFor(ds){
+  if(DATA&&DATA.plans&&DATA.plans[ds])return DATA.plans[ds];
+  return fallbackPlan(pdate(ds));
+}
+function fallbackPlan(d){
+  const wd=(d.getDay()+6)%7;
+  if(wd===1||wd===3||wd===6){
+    return {type:wd===0?'休息日 · 周小结':'休息日',isRest:true,totalMinutes:0,phase:'备用模板',
+      recovery:'今天休息恢复：散散步、做做拉伸就好，别安排跑步或力量训练。',
+      optional:[{name:'轻松散步',detail:'10 分钟（可选）',tip:'慢节奏，能轻松聊天'},{name:'全身拉伸',detail:'5 分钟（可选）',tip:'重点：小腿、大腿、髋部'}]};
+  }
+  return {type:'快走 + 徒手基础',isRest:false,totalMinutes:18,phase:'备用模板',
+    warmup:[{name:'快走热身',detail:'2 分钟'},{name:'手臂大绕环',detail:'10 次'},{name:'原地徒手深蹲（慢）',detail:'8 次'}],
+    main:[{name:'快走',detail:'10 分钟',rest:'保持能说话的节奏',tip:'比平常走路稍快一点'},
+          {name:'徒手深蹲',detail:'10 次 × 3 组',rest:'组间休息 60 秒',tip:'膝盖对准脚尖方向'},
+          {name:'跪姿俯卧撑',detail:'8 次 × 2 组',rest:'组间休息 60 秒',tip:'做不了就扶墙降低难度'}],
+    cooldown:[{name:'小腿拉伸',detail:'每侧 30 秒'},{name:'大腿前侧拉伸',detail:'每侧 30 秒'},{name:'深呼吸放松',detail:'1 分钟'}],
+    notes:'暂未取到当日具体模板（网页数据未更新或超出预生成范围），已显示通用备用计划，每天 07:27 定时更新。',fallback:true};
+}
+function flatOf(p){
+  if(p.isRest)return (p.optional||[]).map((it,i)=>({key:'opt.'+i,sec:'可选活动',name:it.name,detail:it.detail,tip:it.tip,main:false}));
+  const SEC={warmup:'热身',main:'主要训练',cooldown:'放松'};
+  const out=[];
+  ['warmup','main','cooldown'].forEach(sec=>(p[sec]||[]).forEach((it,i)=>
+    out.push({key:sec+'.'+i,sec:SEC[sec],name:it.name,detail:it.detail,rest:it.rest,tip:it.tip,main:sec==='main'})));
+  return out;
+}
+const mainCount=p=>p.isRest?0:((p.main||[]).length);
+
+/* ============ 记录 ============ */
+function recOf(ds){return REC[ds]||null}
+function isSession(ds){const r=REC[ds];return !!(r&&r.completed&&!r.isRest&&(r.mainDone||0)>0)}
+function mainDoneOf(fl,doneSet){let n=0;fl.forEach(it=>{if(it.main&&doneSet.has(it.key))n++});return n}
+
+/* ============ 周统计与总结 ============ */
+function weekKeyOf(d){return dkey(mondayOf(d))}
+function computeWeek(wk){
+  let sessions=0,minutes=0,active=0,done=0,planned=0,target=0;const feel={};
+  const mon=pdate(wk);
+  for(let i=0;i<7;i++){
+    const d=addD(mon,i),ds=dkey(d),p=planFor(ds),r=REC[ds];
+    if(!p.isRest)target++;
+    if(r&&r.completed){
+      if(!p.isRest){
+        if((r.mainDone||0)>0){sessions++;minutes+=(r.duration||0)}
+        done+=(r.mainDone||0);planned+=(r.mainTotal||mainCount(p));
+      }else{active+=(r.duration||0)}
+      if(r.feeling)feel[r.feeling]=(feel[r.feeling]||0)+1;
+    }else if(!p.isRest&&d<today()&&(!P.startDate||ds>=P.startDate)){
+      planned+=mainCount(p);
+    }
+  }
+  const rate=planned?Math.round(done/planned*100):0;
+  return {sessions,minutes,active,done,planned,target,rate,feel};
+}
+function buildSummary(wk,provisional){
+  const st=computeWeek(wk);
+  const mon=pdate(wk),sun=addD(mon,6);
+  const label=cn(mon)+' – '+cn(sun);
+  const parts=[];
+  if(st.sessions===0){
+    parts.push('本周没有训练打卡记录'+(provisional?'':'。')+'，先不纠结强度——下周从每次 10–15 分钟快走开始，把节奏捡回来。');
+  }else{
+    parts.push('本周实际完成训练 '+st.sessions+' 次（目标 '+st.target+' 次），总计 '+fmtMin(st.minutes)+'，动作完成率 '+st.rate+'%。');
+    if(st.active)parts.push('另外还有 '+fmtMin(st.active)+' 的休息日活动，保持得好。');
+  }
+  const sug=[];
+  const tired=(st.feel['太累']||0);
+  if(st.sessions===0){
+    sug.push('从最小目标开始：下次只练 10 分钟快走，完成比完美重要。');
+    sug.push('把训练放在固定时间（如晚饭后），减少「想起来已经太晚」。');
+  }else if(st.rate>=85&&st.sessions>=st.target&&tired===0){
+    sug.push('完成度和体感都不错，下周可按阶段小幅进阶：慢跑段延长 30 秒，或每组次数 +2。');
+    if(st.feel['轻松']>=2)sug.push('多次反馈「轻松」，可以在力量日多加 1 组（不要同时加两组动作）。');
+  }else if(st.rate>=50){
+    sug.push('保持当前强度，优先把缺的训练补上——宁可每次缩短到 15 分钟，也不要整天跳过。');
+    if(tired>=1)sug.push('有反馈「太累」：下次跑步段缩短 30 秒，或改为全程快走。');
+  }else{
+    sug.push('完成率偏低：下周把每次训练压缩到 15 分钟以内、少做一组，先建立「每天都动一点」的习惯。');
+    if(st.sessions<Math.ceil(st.target/2))sug.push('连续跳过往往是因为时间不合适，试着把训练挪到早上或午休。');
+  }
+  if(tired>=2)sug.push('本周多次「太累」：下周整体强度下调 10–20%，多安排一个休息日。');
+  sug.push('身体信号优先：膝盖或腰部有任何不适，当天改为纯快走 15 分钟 + 拉伸。');
+  return {week:wk,label:label,sessions:st.sessions,target:st.target,minutes:st.minutes,
+    rate:st.rate,active:st.active,text:parts.join(''),suggestions:sug,
+    generatedAt:new Date().toISOString(),by:provisional?'preview':'device'};
+}
+function dueWeekKeys(){
+  const now=new Date(),tmon=mondayOf(today());
+  let start=null;
+  if(P.startDate)start=mondayOf(pdate(P.startDate));
+  const ds=Object.keys(REC).sort();
+  if(ds.length)start=start?(()=>{const a=start.getTime(),b=mondayOf(pdate(ds[0])).getTime();return new Date(Math.min(a,b))})():mondayOf(pdate(ds[0]));
+  if(!start)return [];
+  const out=[];
+  for(let m=new Date(start);m<=tmon;m=addD(m,7)){
+    const due=new Date(m);due.setDate(due.getDate()+6);due.setHours(20,0,0,0);
+    if(now>=due)out.push(dkey(m));
+  }
+  return out;
+}
+function ensureSummaries(){
+  let ch=false;
+  dueWeekKeys().forEach(wk=>{if(!SUM[wk]){SUM[wk]=buildSummary(wk,false);ch=true}});
+  if(ch)jsave();
+  return ch;
+}
+
+/* ============ 渲染：今日 ============ */
+function renderToday(){
+  const td=today(),ds=dkey(td),p=planFor(ds),fl=flatOf(p);
+  const r=recOf(ds),done=new Set((r&&r.doneItems)||[]);
+  const md=mainDoneOf(fl,done),mt=fl.filter(x=>x.main).length;
+  const pct=fl.length?Math.round(done.size/fl.length*100):0;
+  let h='';
+  h+='<div class="hero">'
+    +'<div class="hrow"><div class="hdate">'+WD[td.getDay()]+' · '+cn(td)+'</div>'
+    +'<div class="hchip">'+esc(p.isRest?'休息日':p.type)+'</div></div>'
+    +'<div class="htitle">'+(p.isRest?'今天休息恢复':'今日训练')+'</div>'
+    +'<div class="hmeta"><span>⏱ 约 '+(p.totalMinutes||0)+' 分钟</span>'
+    +(p.phase?('<span>'+esc(p.phase)+'</span>'):'')
+    +(P.weeklyTarget?('<span>本周目标 '+P.weeklyTarget+' 练</span>'):'')+'</div>'
+    +'<div class="prog"><i id="progI" style="width:'+pct+'%"></i></div>'
+    +'<div class="prog-row"><span id="progTxt">今日进度 '+done.size+'/'+fl.length+'</span><span>'+(p.fallback?'备用模板':'按阶段生成')+'</span></div></div>';
+  if(r&&r.completed&&!p.isRest)h+='<div class="donebanner">✓ 今天已打卡 · 用时 '+((r.duration||0))+' 分钟'+((r.feeling)?(' · 感觉'+esc(r.feeling)):'')+'</div>';
+  if(p.isRest){
+    h+='<div class="sec"><span class="dot"></span>恢复建议</div>';
+    h+='<div class="card"><div class="recover">'+esc(p.recovery||'')+'</div></div>';
+    if((p.optional||[]).length){
+      h+='<div class="sec"><span class="dot"></span>可选活动<small>做了就勾选，不计入训练次数</small></div>';
+      p.optional.forEach((it,i)=>{
+        const on=done.has('opt.'+i);
+        h+='<div class="item"><button class="ck'+(on?' on':'')+'" data-k="opt.'+i+'">'+CK_SVG+'</button>'
+          +'<div style="flex:1"><div class="iname">'+esc(it.name)+'<span class="opt-tag">可选</span></div>'
+          +'<div class="idet">'+esc(it.detail||'')+'</div>'+(it.tip?('<div class="itip">'+esc(it.tip)+'</div>'):'')+'</div></div>';
+      });
+    }
+  }else{
+    const SECS=[['warmup','热身'],['main','主要训练'],['cooldown','放松']];
+    SECS.forEach(s=>{
+      const items=fl.filter(x=>x.sec===s[1]);
+      if(!items.length)return;
+      h+='<div class="sec"><span class="dot"></span>'+s[1]+'<small>'+((s[0]==='main')?('力量动作之间都有组间休息'):'')+'</small></div>';
+      items.forEach(it=>{
+        const on=done.has(it.key);
+        h+='<div class="item'+(it.main?' it-main':'')+'"><button class="ck'+(on?' on':'')+'" data-k="'+it.key+'">'+CK_SVG+'</button>'
+          +'<div style="flex:1"><div class="iname">'+esc(it.name)+'</div>'
+          +(it.detail?('<div class="idet">'+esc(it.detail)+'</div>'):'')
+          +(it.rest?('<span class="rest-chip">'+esc(it.rest)+'</span>'):'')
+          +(it.tip?('<div class="itip">'+esc(it.tip)+'</div>'):'')+'</div></div>';
+      });
+    });
+    if(p.notes)h+='<div class="notes">💡 '+esc(p.notes)+'</div>';
+  }
+  h+='<button class="cta" id="btnCheck">'+((r&&r.completed)?'更新今日打卡':'完成打卡')+'</button>';
+  if(p.fallback)h+='<div class="hint">当前是备用模板：定时任务尚未覆盖这一天。点击勾选与打卡功能完全正常。</div>';
+  $('#v-today').innerHTML=h;
+  $$('#v-today .ck').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.k;
+    if(done.has(k))done.delete(k);else done.add(k);
+    b.classList.toggle('on');
+    const cur=REC[ds]||{};
+    REC[ds]=Object.assign({},cur,{date:ds,type:p.type,isRest:!!p.isRest,
+      doneItems:Array.from(done),plannedItems:fl.length,
+      mainDone:mainDoneOf(fl,done),mainTotal:mt});
+    if(cur.completed)REC[ds].completed=true;
+    jsave();
+    const np=fl.length?Math.round(done.size/fl.length*100):0;
+    const pi=$('#progI'),pt=$('#progTxt');
+    if(pi)pi.style.width=np+'%';
+    if(pt)pt.textContent='今日进度 '+done.size+'/'+fl.length;
+  }));
+  $('#btnCheck').addEventListener('click',openSheet);
+}
+
+/* ============ 打卡弹层 ============ */
+let FEEL='刚好';
+function openSheet(){
+  const td=today(),ds=dkey(td),p=planFor(ds);
+  const r=recOf(ds)||{};
+  FEEL=r.feeling||'刚好';
+  const def=(r.duration||(p.isRest?10:p.totalMinutes||15));
+  const s=$('#sheet');
+  s.innerHTML='<div class="sh-t">'+(p.isRest?'记录休息日':'完成打卡')+'</div>'
+    +'<div class="sh-l">实际用时（'+(p.isRest?'活动':'训练')+'时长）</div>'
+    +'<div class="stepper"><button class="stp" id="durM">−</button><input id="shDur" type="number" inputmode="numeric" min="1" max="120" value="'+def+'"><span class="sh-unit">分钟</span><button class="stp" id="durP">＋</button></div>'
+    +'<div class="sh-l">训练感受</div>'
+    +'<div class="chips" id="feelChips">'+['轻松','刚好','有点累','太累'].map(f=>'<button class="chip'+(f===FEEL?' on':'')+'" data-f="'+f+'">'+f+'</button>').join('')+'</div>'
+    +'<div class="sh-l">备注（可选）</div>'
+    +'<textarea id="shNote" placeholder="今天的状态、身体反馈、天气…">'+esc(r.note||'')+'</textarea>'
+    +'<button class="cta" id="shSave" style="margin-top:16px">保存打卡</button>'
+    +'<button class="ghost sh-cancel" id="shCancel">取消</button>';
+  $('#mask').classList.remove('hide');
+  const durEl=$('#shDur');
+  $('#durM').onclick=()=>{durEl.value=Math.max(1,(parseInt(durEl.value)||1)-1)};
+  $('#durP').onclick=()=>{durEl.value=Math.min(120,(parseInt(durEl.value)||0)+1)};
+  $$('#feelChips .chip').forEach(c=>c.onclick=()=>{
+    FEEL=c.dataset.f;$$('#feelChips .chip').forEach(x=>x.classList.toggle('on',x.dataset.f===FEEL));
+  });
+  $('#shCancel').onclick=closeSheet;
+  $('#shSave').onclick=()=>{
+    const fl=flatOf(p);
+    const done=new Set(r.doneItems||[]);
+    const dur=Math.max(1,Math.min(120,parseInt(durEl.value)||def));
+    REC[ds]=Object.assign({},r,{date:ds,type:p.type,isRest:!!p.isRest,
+      doneItems:Array.from(done),plannedItems:fl.length,
+      mainDone:mainDoneOf(fl,done),mainTotal:fl.filter(x=>x.main).length,
+      duration:dur,feeling:FEEL,note:($('#shNote').value||'').trim().slice(0,200),
+      completed:true,ts:Date.now()});
+    jsave();closeSheet();toast('已打卡，今天辛苦啦 ✓');renderAll();
+  };
+}
+function closeSheet(){$('#mask').classList.add('hide')}
+$('#mask').addEventListener('click',e=>{if(e.target.id==='mask')closeSheet()});
+
+/* ============ 渲染：打卡 ============ */
+function renderLog(){
+  const td=today(),tds=dkey(td),mon=mondayOf(td);
+  let cells='';
+  for(let i=0;i<7;i++){
+    const d=addD(mon,i),ds=dkey(d),p=planFor(ds),r=REC[ds];
+    let cls='',b='·';
+    if(!p.isRest&&r&&r.completed&&(r.mainDone||0)>0){cls='done';b='✓'}
+    else if(p.isRest&&r&&r.completed){cls='rdone';b='休'}
+    else if(ds===tds){cls='today';b='今'}
+    else if(d<td&&!p.isRest&&(!P.startDate||ds>=P.startDate)){cls='missed';b='漏'}
+    else if(p.isRest){cls='rest';b='休'}
+    cells+='<div class="cell '+cls+'"><div class="d">周'+(i+1===7?'日':'周'.slice(0,0)+('一二三四五六'[i]))+'</div><div class="b">'+b+'</div></div>';
+  }
+  let wkSessions=0;
+  for(let i=0;i<7;i++){const ds=dkey(addD(mon,i));if(isSession(ds))wkSessions++}
+  let streak=0,cur=td;
+  if(!isSession(dkey(cur)))cur=addD(cur,-1);
+  while(isSession(dkey(cur))){streak++;cur=addD(cur,-1)}
+  const total=Object.keys(REC).filter(isSession).length;
+  let h='<div class="card"><div class="weekstrip">'+cells+'</div>'
+    +'<div class="statrow">'
+    +'<div class="stat"><b>'+wkSessions+'</b><span>本周训练</span></div>'
+    +'<div class="stat"><b>'+streak+'</b><span>连续天数</span></div>'
+    +'<div class="stat"><b>'+total+'</b><span>累计次数</span></div>'
+    +'</div></div>';
+  h+='<div class="sec"><span class="dot"></span>打卡记录</div>';
+  const list=Object.values(REC).filter(r=>r.completed).sort((a,b)=>b.date<a.date?-1:1).slice(0,30);
+  if(!list.length)h+='<div class="card" style="text-align:center;color:var(--mut);font-size:13.5px;padding:26px">还没有打卡记录<br><span style="font-size:12px">在「今日训练」里勾选完成的动作，然后点「完成打卡」</span></div>';
+  list.forEach(r=>{
+    const d=pdate(r.date);
+    const bd=r.isRest?'活动':((r.mainDone||0)>0?('完成 '+(r.mainDone||0)+'/'+(r.mainTotal||0)):'未完成');
+    const bcls=r.isRest?'r':((r.mainDone||0)>0?'':'m');
+    h+='<div class="h-item" data-d="'+r.date+'"><div class="h-row">'
+      +'<div><div class="h-date">'+cn(d)+' '+WD[d.getDay()]+'</div>'
+      +'<div class="h-sub">'+esc(r.type||'')+(r.duration?(' · '+r.duration+' 分钟'):'')+(r.feeling?(' · 感觉'+esc(r.feeling)):'')+'</div></div>'
+      +'<span class="h-badge '+bcls+'">'+bd+'</span></div>'
+      +'<div class="h-detail hide">'
+      +(r.note?('备注：'+esc(r.note)+'<br>'):'')
+      +'动作进度：'+(r.mainDone||0)+'/'+(r.mainTotal||0)+'（主要训练项）<br>'
+      +'<button class="tbtn warn" style="margin-top:8px" data-del="'+r.date+'">删除这条记录</button></div></div>';
+  });
+  h+='<div class="sec"><span class="dot"></span>数据备份</div>'
+    +'<div class="card"><div class="hint" style="margin:0 0 10px">打卡数据只保存在这台设备的浏览器里，不会上传。换手机或清缓存前，用「同步码」迁移。</div>'
+    +'<div class="tools"><button class="tbtn" id="expBtn">导出同步码</button><button class="tbtn" id="impBtn">导入同步码</button></div>'
+    +'<div class="tools" style="margin-top:8px"><button class="tbtn" id="clrBtn">清空全部数据</button></div></div>';
+  $('#v-log').innerHTML=h;
+  $$('#v-log .h-item').forEach(el=>el.addEventListener('click',e=>{
+    if(e.target.dataset.del)return;
+    el.querySelector('.h-detail').classList.toggle('hide');
+  }));
+  $$('#v-log [data-del]').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const ds=b.dataset.del;
+    if(confirm('删除 '+ds+' 的打卡记录？（已生成的周总结不会自动改写）')){
+      delete REC[ds];jsave();renderAll();toast('已删除');
+    }
+  }));
+  $('#expBtn').onclick=()=>{
+    const code='LITEFIT.'+btoa(unescape(encodeURIComponent(JSON.stringify({v:1,REC,SUM}))));
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(code).then(()=>toast('同步码已复制到剪贴板'),()=>prompt('全选复制同步码：',code));
+    else prompt('全选复制同步码：',code);
+  };
+  $('#impBtn').onclick=()=>{
+    const s=prompt('粘贴同步码：');
+    if(!s)return;
+    try{
+      const raw=s.trim();
+      if(raw.indexOf('LITEFIT.')!==0)throw 0;
+      const o=JSON.parse(decodeURIComponent(escape(atob(raw.slice(8)))));
+      Object.keys(o.REC||{}).forEach(k=>{const a=REC[k],b=o.REC[k];if(!a||!(a.ts>b.ts))REC[k]=b});
+      Object.keys(o.SUM||{}).forEach(k=>{if(!SUM[k])SUM[k]=o.SUM[k]});
+      jsave();renderAll();toast('导入成功');
+    }catch(e){toast('同步码无效')}
+  };
+  $('#clrBtn').onclick=()=>{
+    if(confirm('确定清空所有打卡与总结数据？此操作不可恢复。')){
+      Object.keys(REC).forEach(k=>delete REC[k]);Object.keys(SUM).forEach(k=>delete SUM[k]);jsave();renderAll();toast('已清空');
+    }
+  };
+}
+
+/* ============ 渲染：每周总结 ============ */
+function renderWeek(){
+  const mon=mondayOf(today()),wk=dkey(mon);
+  const st=computeWeek(wk);
+  let h='<div class="sec"><span class="dot"></span>本周概览<small>'+cn(mon)+' – '+cn(addD(mon,6))+'</small></div>';
+  h+='<div class="card">'
+    +'<div class="statrow" style="margin:0">'
+    +'<div class="stat"><b>'+st.sessions+'</b><span>训练次数 / 目标'+st.target+'</span></div>'
+    +'<div class="stat"><b>'+(st.minutes>=60?((st.minutes/60).toFixed(1).replace('.0','')+'h'):st.minutes)+'</b><span>总时长（分钟）</span></div>'
+    +'<div class="stat"><b>'+st.rate+'%</b><span>动作完成率</span></div>'
+    +'</div>'
+    +'<div class="ratewrap"><div class="ratelabel"><span>本周完成率走势以实际打卡为准</span><span>'+st.done+'/'+st.planned+' 个动作</span></div>'
+    +'<div class="ratebar"><i style="width:'+st.rate+'%"></i></div></div>'
+    +(st.active?('<div class="hint" style="margin:8px 0 0">另有 '+fmtMin(st.active)+' 休息日轻活动</div>'):'')
+    +'<div class="hint" style="margin:8px 0 0">每周日 20:00 自动生成正式总结并存档（需页面当时打开；若没打开，下次打开页面时补生成）。统计只算实际打卡，不会把计划当成已完成。</div></div>';
+  const keys=Object.keys(SUM).sort();
+  if(!keys.length){
+    const pv=buildSummary(wk,true);
+    h+='<div class="sec"><span class="dot"></span>总结预览<small>实时按当前记录计算</small></div>'
+      +'<div class="card"><div class="wk-label">'+pv.label+'（本周）</div><div class="sum-text">'+esc(pv.text)+'</div>'
+      +'<div class="sug-t">下周调整建议（预览）</div><ul class="sug">'+pv.suggestions.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul></div>';
+  }else{
+    h+='<div class="sec"><span class="dot"></span>历史总结</div>';
+    keys.slice().reverse().forEach(k=>{
+      const s=SUM[k];
+      h+='<div class="card"><div class="wk-label">'+esc(s.label||k)+'</div><div class="sum-text">'+esc(s.text||'')+'</div>'
+        +(s.suggestions&&s.suggestions.length?('<div class="sug-t">下周调整建议</div><ul class="sug">'+s.suggestions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'):'')
+        +'<div class="wk-meta">'
+        +'<span class="wk-pill">训练 '+s.sessions+'/'+(s.target||'—')+' 次</span>'
+        +'<span class="wk-pill">'+fmtMin(s.minutes||0)+'</span>'
+        +'<span class="wk-pill">完成率 '+(s.rate||0)+'%</span>'
+        +(s.active?('<span class="wk-pill">活动 '+fmtMin(s.active)+'</span>'):'')
+        +'</div><div class="gen-by">由'+(s.by==='device'?'设备端基于打卡记录':'系统')+'生成 · '+esc((s.generatedAt||'').slice(0,16).replace('T',' '))+'</div></div>';
+    });
+  }
+  h+='<div class="card"><div class="hint" style="margin:0">想调整计划？直接对 ZCode 说「太轻松了」「膝盖不舒服」「想加力量」等，下次 07:27 更新时生效。</div></div>';
+  $('#v-week').innerHTML=h;
+}
+
+/* ============ 框架 ============ */
+function renderAll(){renderToday();renderLog();renderWeek()}
+function show(v){
+  ['today','log','week'].forEach(x=>$('#v-'+x).classList.toggle('hide',x!==v));
+  $$('.tab').forEach(t=>t.classList.toggle('on',t.dataset.v===v));
+  window.scrollTo(0,0);
+}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>show(t.dataset.v)));
+let toastTimer=null;
+function toast(msg){
+  const el=$('#toast');el.textContent=msg;el.classList.remove('hide');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hide'),2200);
+}
+(function init(){
+  if(DATA&&DATA.generatedAt){
+    const g=new Date(DATA.generatedAt);
+    $('#genInfo').innerHTML='每日 07:27 自动更新<br>计划生成 '+cn(g)+' '+pad(g.getHours())+':'+pad(g.getMinutes());
+  }else{
+    $('#genInfo').innerHTML='每日 07:27 自动更新';
+  }
+  ensureSummaries();
+  renderAll();
+  const q=new URLSearchParams(location.search).get('tab');
+  if(q&&['today','log','week'].includes(q))show(q);
+  setInterval(()=>{if(ensureSummaries())renderAll()},30000);
+})();
+</script>
+</body>
+</html>
