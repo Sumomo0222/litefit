@@ -1,7 +1,7 @@
 /* 自动生成：node scripts/generate.mjs（每天 07:27 定时任务维护，勿手改） */
 window.__FIT_DATA__ = {
  "version": 2,
- "generatedAt": "2026-11-25T23:27:30.318Z",
+ "generatedAt": "2026-11-26T23:27:23.452Z",
  "generator": "scripts/generate.mjs",
  "profile": {
   "goal": "减脂塑形",
@@ -1160,6 +1160,27 @@ window.__FIT_DATA__ = {
     }
    ],
    "notes": "心肺日重节奏不重速度。跑步路线选平坦路面，穿缓冲好一点的鞋。"
+  },
+  "2026-12-24": {
+   "date": "2026-12-24",
+   "weekday": "周四",
+   "phase": "阶段 C · 提升期（第 5–6 周）",
+   "type": "休息日",
+   "isRest": true,
+   "totalMinutes": 0,
+   "recovery": "身体是在休息中变强的。今天不安排跑步和力量，散散步、拉伸一下就很好。",
+   "optional": [
+    {
+     "name": "轻松散步",
+     "detail": "10 分钟（可选）",
+     "tip": "小区或公园慢节奏"
+    },
+    {
+     "name": "全身拉伸",
+     "detail": "5 分钟（可选）",
+     "tip": "重点：小腿、大腿、髋部"
+    }
+   ]
   }
  }
 };
